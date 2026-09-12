@@ -1,20 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("enseignantForm");
   const tableBody = document.getElementById("enseignantsTableBody");
+  const searchInput = document.getElementById("searchEnseignant");
 
   let enseignants = getData(STORAGE_KEYS.enseignants);
-  let matieres = getData(STORAGE_KEYS.matieres);
   let editId = null;
 
-  function fillMatiereSelect() {
-    const select = document.getElementById("enseignantMatiere");
-    select.innerHTML = `<option value="">Choisir une matière</option>`;
-    matieres.forEach(m => {
-      select.innerHTML += `<option value="${m.id}">${m.nom}</option>`;
-    });
-  }
-
   function renderEnseignants(list = enseignants) {
+    const matieres = getData(STORAGE_KEYS.matieres);
     tableBody.innerHTML = "";
 
     list.forEach(enseignant => {
@@ -33,6 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
       tableBody.appendChild(tr);
     });
+
+    updateDashboard();
   }
 
   form.addEventListener("submit", e => {
@@ -88,6 +83,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  fillMatiereSelect();
+  searchInput.addEventListener("input", () => {
+    const value = searchInput.value.toLowerCase();
+    const filtered = enseignants.filter(e =>
+      `${e.nom} ${e.prenom}`.toLowerCase().includes(value) ||
+      e.email.toLowerCase().includes(value)
+    );
+    renderEnseignants(filtered);
+  });
+
   renderEnseignants();
 });
