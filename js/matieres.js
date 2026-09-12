@@ -21,6 +21,17 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
       tableBody.appendChild(tr);
     });
+
+    updateDashboard();
+  }
+
+  function fillMatiereSelect() {
+    const select = document.getElementById("enseignantMatiere");
+    if (!select) return;
+    select.innerHTML = `<option value="">Choisir une matière</option>`;
+    matieres.forEach(m => {
+      select.innerHTML += `<option value="${m.id}">${m.nom}</option>`;
+    });
   }
 
   form.addEventListener("submit", e => {
@@ -45,6 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
     saveData(STORAGE_KEYS.matieres, matieres);
     form.reset();
     renderMatieres();
+    fillMatiereSelect();
   });
 
   tableBody.addEventListener("click", e => {
@@ -55,6 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
       matieres = matieres.filter(m => m.id !== id);
       saveData(STORAGE_KEYS.matieres, matieres);
       renderMatieres();
+      fillMatiereSelect();
     }
 
     if (e.target.classList.contains("edit-btn")) {
@@ -71,5 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderMatieres(filtered);
   });
 
+  window.fillMatiereSelect = fillMatiereSelect;
   renderMatieres();
+  fillMatiereSelect();
 });
