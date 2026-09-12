@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plateforme de gestion scolaire V1</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header-content">
+      <div>
+        <h1>Plateforme de gestion scolaire</h1>
+        <p>V1 — Gestion des enseignants, classes et matières</p>
+      </div>
+      <nav class="nav">
+        <a href="#dashboard">Dashboard</a>
+        <a href="#matieres">Matières</a>
+        <a href="#enseignants">Enseignants</a>
+        <a href="#classes">Classes</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="dashboard" class="card">
+      <h2>Tableau de bord</h2>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <h3 id="countMatieres">0</h3>
+          <p>Matières</p>
+        </div>
+        <div class="stat-box">
+          <h3 id="countEnseignants">0</h3>
+          <p>Enseignants</p>
+        </div>
+        <div class="stat-box">
+          <h3 id="countClasses">0</h3>
+          <p>Classes</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="matieres" class="card">
+      <div class="section-head">
+        <h2>Gestion des matières</h2>
+        <input type="text" id="searchMatiere" placeholder="Rechercher une matière..." />
+      </div>
+
+      <form id="matiereForm" class="form-grid">
+        <input type="text" id="matiereNom" placeholder="Nom de la matière" />
+        <input type="text" id="matiereCode" placeholder="Code (optionnel)" />
+        <button type="submit">Enregistrer la matière</button>
+      </form>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Code</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="matieresTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="enseignants" class="card">
+      <div class="section-head">
+        <h2>Gestion des enseignants</h2>
+        <input type="text" id="searchEnseignant" placeholder="Rechercher un enseignant..." />
+      </div>
+
+      <form id="enseignantForm" class="form-grid">
+        <input type="text" id="enseignantNom" placeholder="Nom" />
+        <input type="text" id="enseignantPrenom" placeholder="Prénom" />
+        <input type="email" id="enseignantEmail" placeholder="Email" />
+        <input type="text" id="enseignantTelephone" placeholder="Téléphone" />
+        <select id="enseignantMatiere">
+          <option value="">Choisir une matière</option>
+        </select>
+        <button type="submit">Enregistrer l'enseignant</button>
+      </form>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Prénom</th>
+              <th>Email</th>
+              <th>Téléphone</th>
+              <th>Matière</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="enseignantsTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="classes" class="card">
+      <div class="section-head">
+        <h2>Gestion des classes</h2>
+        <input type="text" id="searchClasse" placeholder="Rechercher une classe..." />
+      </div>
+
+      <form id="classeForm" class="form-grid">
+        <input type="text" id="classeNom" placeholder="Nom de la classe" />
+        <input type="text" id="classeNiveau" placeholder="Niveau (ex: 6ème, 5ème...)" />
+        <input type="number" id="classeEffectif" placeholder="Effectif" />
+        <button type="submit">Enregistrer la classe</button>
+      </form>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Niveau</th>
+              <th>Effectif</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="classesTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/storage.js"></script>
+  <script src="js/matieres.js"></script>
+  <script src="js/enseignants.js"></script>
+  <script src="js/classes.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
